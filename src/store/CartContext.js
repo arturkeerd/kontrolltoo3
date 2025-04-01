@@ -1,4 +1,4 @@
-import { createContext, useReducer } from 'react';
+import { createContext, useReducer, useEffect } from 'react';
 
 const CartContext = createContext({
   items: [],
@@ -44,14 +44,17 @@ export const CartContextProvider = ({ children }) => {
     dispatchCartAction({ type: 'CLEAR_CART' });
   };
 
-  const contextValue = {
-    items: cartState.items,
-    addItem: addItemHandler,
-    clearCart: clearCartHandler,
-  };
+  // Log updated cart items whenever they change
+  useEffect(() => {
+    console.log("Updated Cart Items:", cartState.items);
+  }, [cartState.items]);
 
   return (
-    <CartContext.Provider value={contextValue}>
+    <CartContext.Provider value={{
+      items: cartState.items,
+      addItem: addItemHandler,
+      clearCart: clearCartHandler
+    }}>
       {children}
     </CartContext.Provider>
   );
