@@ -1,4 +1,5 @@
 import { props } from "react";
+import Button from "./UI/Button";
 
 const MealItem = (props) => {
     const formattedPrice = new Intl.NumberFormat(navigator.language, {
@@ -17,9 +18,11 @@ const MealItem = (props) => {
                     <p className="meal-item-price">{formattedPriceWithSymbolAfter}</p>
                     <p className="meal-item-description">{props.meal.description}</p>
                 </div>
-                <p>
-                    <button >Add to Cart</button>
-                </p>
+                <div>
+                    <Button onClick={() => console.log(`Added ${props.meal.name} to cart`)}>
+                        Add to Cart
+                    </Button>
+                </div>
             </article>
         </li>
         
